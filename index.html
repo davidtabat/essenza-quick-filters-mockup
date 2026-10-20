@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quick Filters Manager – mockup</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4f2ee;--surface:#fff;--text:#2b2a28;--muted:#6f6b64;--line:#dcd8d0;--accent:#eb5202;--accent-t:#fff;--soft:#fdeee5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d1c1a;--surface:#2a2927;--text:#eeebe5;--muted:#a09b92;--line:#413f3b;--soft:#3d2a1f}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d1c1a;--surface:#2a2927;--text:#eeebe5;--muted:#a09b92;--line:#413f3b;--soft:#3d2a1f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--surface);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:16px;margin:0}
+.crumb{color:var(--muted);font-size:12px}
+.sp{flex:1}
+main{max-width:1050px;margin:0 auto;padding:16px}
+nav{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+nav button{background:none;border:0;padding:10px 14px;font:inherit;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
+nav button.on{color:var(--accent);border-color:var(--accent);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:16px}
+.card h2{font-size:14px;margin:0 0 4px}
+.card p.d{margin:0 0 12px;color:var(--muted);font-size:12px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+input,select{font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:6px 8px;width:100%}
+.btn{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:7px 12px;border-radius:5px;cursor:pointer}
+.btn.p{background:var(--accent);border-color:var(--accent);color:var(--accent-t)}
+.btn.s{padding:3px 8px;font-size:12px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+label{font-size:12px;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);padding:7px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.chip.x{border-color:var(--accent);background:var(--soft)}
+.mut{color:var(--muted)}
+.hid{display:none}
+</style>
+</head>
+<body>
+<header><h1>Quick Filters Manager</h1><span class="crumb">Catalog › Quick Filters</span><span class="sp"></span><span class="mut" style="font-size:12px">Mockup – no real data</span></header>
+<main>
+<nav id="tabs"><button data-t="sets" class="on">Sets</button><button data-t="edit">Edit set</button></nav>
+
+<section id="sets">
+  <div class="card">
+    <div class="row"><div><h2>Quick Filter sets</h2><p class="d" style="margin:0">Define a set once and reuse it on many categories and filter pages.</p></div><span class="sp"></span><button class="btn p" onclick="go('edit')">+ New set</button></div>
+    <div class="tw"><table>
+      <tr><th>Set</th><th>Filters</th><th>Used on</th><th></th></tr>
+      <tr><td><b>Dekbedovertrekken – bed sizes</b></td><td>4</td><td>3 categories · 1 filter page</td><td><button class="btn s" onclick="go('edit')">Edit</button></td></tr>
+      <tr><td><b>Hoeslakens – bed sizes</b></td><td>6</td><td>2 categories</td><td><button class="btn s" onclick="go('edit')">Edit</button></td></tr>
+      <tr><td><b>Kussens – firmness</b></td><td>3</td><td>1 category · 2 filter pages</td><td><button class="btn s" onclick="go('edit')">Edit</button></td></tr>
+      <tr><td><b>Sale – categories</b></td><td>5</td><td>1 filter page</td><td><button class="btn s" onclick="go('edit')">Edit</button></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section id="edit" class="hid">
+  <div class="card">
+    <div class="row"><div style="flex:1;min-width:220px"><label>Set name (internal)</label><input value="Dekbedovertrekken – bed sizes"></div></div>
+    <h2>Filters in this set</h2>
+    <p class="d">Labels are translated per store view. Drag the handle to change the order everywhere at once.</p>
+    <div class="tw"><table id="ft">
+      <tr><th></th><th>Display</th><th>Attribute</th><th>Value</th><th>Label NL</th><th>Label DE</th><th>Label EN</th><th>Image</th><th></th></tr>
+    </table></div>
+    <div class="row" style="margin-top:12px"><button class="btn" onclick="addRow()">+ Add filter</button></div>
+  </div>
+  <div class="card">
+    <h2>Use this set on</h2>
+    <p class="d">Reuse the same set on several categories, and/or on specific filter pages.</p>
+    <label>Categories (click to select)</label>
+    <div class="chips" id="cats" style="margin:6px 0 16px"></div>
+    <label>Filter pages (filter-specific content pages)</label>
+    <div class="row" style="margin-top:6px"><select id="fp" style="max-width:340px"></select><button class="btn" onclick="addFp()">Add</button></div>
+    <div class="chips" id="fpl"></div>
+  </div>
+  <div class="row"><button class="btn" onclick="go('sets')">Cancel</button><button class="btn p" onclick="this.textContent='Saved ✓'">Save set</button></div>
+</section>
+</main>
+<script>
+var filters=[
+ {d:'text',a:'bed_size',v:'140x200/220',nl:'1-persoons (140x200/220)',de:'1-Personen (140x200/220)',en:'Single (140x200/220)'},
+ {d:'text',a:'bed_size',v:'200x200/220',nl:'2-persoons (200x200/220)',de:'2-Personen (200x200/220)',en:'Double (200x200/220)'},
+ {d:'text',a:'bed_size',v:'240x200/220',nl:'Lits-Jumeaux (240x200/220)',de:'Doppelbett (240x200/220)',en:'Twin (240x200/220)'},
+ {d:'text',a:'bed_size',v:'260x200/220',nl:'Lits-Jumeaux XL (260x200/220)',de:'Doppelbett XL (260x200/220)',en:'Twin XL (260x200/220)'}];
+var attrs={bed_size:['140x200/220','200x200/220','240x200/220','260x200/220'],material:['Katoen','Flanel','Satijn'],color:['Wit','Grijs','Blauw']};
+var cats=[['Dekbedovertrekken',1],['Dekbedovertrekken › Flanel',1],['Dekbedovertrekken › Baby',1],['Hoeslakens',0],['Kussens',0]];
+var fps=[[101,'Dekbed 2-persoons katoen'],[102,'Dekbed grijs'],[214,'Kussens stevig'],[230,'Sale dekbedovertrekken']];
+var usedFp=[102];
+function go(t){document.querySelectorAll('main section').forEach(function(s){s.classList.toggle('hid',s.id!==t)});
+ document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)})}
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){go(b.dataset.t)}});
+function esc(s){return String(s).replace(/"/g,'&quot;')}
+function opts(l,s){return l.map(function(x){return'<option'+(x===s?' selected':'')+'>'+x+'</option>'}).join('')}
+function rows(){var t=document.getElementById('ft');
+ t.querySelectorAll('tr.r').forEach(function(r){r.remove()});
+ filters.forEach(function(f,i){var r=document.createElement('tr');r.className='r';
+  r.innerHTML='<td class="mut">⋮⋮</td>'+
+  '<td><select data-k="d">'+opts(['Text','Image'],f.d==='image'?'Image':'Text')+'</select></td>'+
+  '<td><select data-k="a">'+opts(Object.keys(attrs),f.a)+'</select></td>'+
+  '<td><select data-k="v">'+opts(attrs[f.a],f.v)+'</select></td>'+
+  '<td><input data-l="nl" value="'+esc(f.nl)+'"></td><td><input data-l="de" value="'+esc(f.de)+'"></td><td><input data-l="en" value="'+esc(f.en)+'"></td>'+
+  '<td>'+(f.d==='image'?'<button class="btn s">Upload image</button>':'<span class="mut">–</span>')+'</td>'+
+  '<td><button class="btn s" data-i="'+i+'">✕</button></td>';
+  r.querySelectorAll('[data-k]').forEach(function(s){s.onchange=function(){var k=s.dataset.k;if(k==='d')f.d=s.value.toLowerCase();else if(k==='a'){f.a=s.value;f.v=attrs[f.a][0]}else f.v=s.value;rows()}});
+  r.querySelectorAll('[data-l]').forEach(function(s){s.oninput=function(){f[s.dataset.l]=s.value}});
+  r.querySelector('[data-i]').onclick=function(){filters.splice(i,1);rows()};
+  t.appendChild(r)})}
+function addRow(){filters.push({d:'text',a:'bed_size',v:'140x200/220',nl:'',de:'',en:''});rows()}
+function addFp(){var v=+document.getElementById('fp').value;if(v&&usedFp.indexOf(v)<0)usedFp.push(v);drawUse()}
+function drawUse(){
+ var c=document.getElementById('cats');c.innerHTML='';
+ cats.forEach(function(x){var b=document.createElement('span');b.className='chip'+(x[1]?' x':'');b.textContent=(x[1]?'✓ ':'')+x[0];b.onclick=function(){x[1]=x[1]?0:1;drawUse()};c.appendChild(b)});
+ var l=document.getElementById('fpl');l.innerHTML='';
+ fps.filter(function(f){return usedFp.indexOf(f[0])>=0}).forEach(function(f){var b=document.createElement('span');b.className='chip x';b.textContent=f[1]+' (ID '+f[0]+')  ✕';b.onclick=function(){usedFp.splice(usedFp.indexOf(f[0]),1);drawUse()};l.appendChild(b)});
+ document.getElementById('fp').innerHTML='<option value="">Select filter page…</option>'+fps.filter(function(f){return usedFp.indexOf(f[0])<0}).map(function(f){return'<option value="'+f[0]+'">'+f[1]+' (ID '+f[0]+')</option>'}).join('');
+}
+rows();drawUse();
+</script>
+</body>
+</html>
+
